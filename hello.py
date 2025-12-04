@@ -1,18 +1,23 @@
 import typer #required lib
+from typing import Optional
 
 # make func for the script
-def main(
-    name: str,
-    lastname: str = typer.Option("", help="Фамилия пользователя."),
-    formal: bool = typer.Option(False, "--formal", "-f", help="Использовать формальное приветствие."),
-):
-    """
-    Говорит "Привет" пользователю, опционально используя фамилию и формальный стиль.
-    """
-    if formal:
-        print(f"Добрый день, {name} {lastname}!")
-    else:
-        print(f"Привет, {name}!")
+def greet_user(
+    first_name: str,
+    last_name: Optional[str] = typer.Option(None, "--last-name", "-l", help="User's last name."),
+    is_formal: bool = typer.Option(False, "--formal", "-f", help="Use formal greeting.")
+) -> None:
 
-if __name__ == "__main__": #запускаем
-    typer.run(main)
+    """
+    Prints a greeting to the user.
+    Supports optional last name and formal style.
+    """
+    if is_formal and last_name:
+        print(f"Good day, {first_name} {last_name}!")
+    elif is_formal:
+        print(f"Good day, {first_name}!")
+    else:
+        print(f"Hello, {first_name}!")
+
+if __name__ == "__main__": #launching
+    typer.run(greet_user)
