@@ -1,4 +1,4 @@
-import typer #required lib
+import typer #required library
 
 # make func for the script
 def main(
