@@ -1,5 +1,6 @@
-import typer #required lib
+import typer #required library
 from typing import Optional
+
 
 # make func for the script
 def greet_user(
