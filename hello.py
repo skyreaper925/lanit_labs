@@ -1,5 +1,6 @@
-import typer
+import typer #required lib
 
+# make func for the script
 def main(
     name: str,
     lastname: str = typer.Option("", help="Фамилия пользователя."),
@@ -13,5 +14,5 @@ def main(
     else:
         print(f"Привет, {name}!")
 
-if __name__ == "__main__":
+if __name__ == "__main__": #запускаем
     typer.run(main)
