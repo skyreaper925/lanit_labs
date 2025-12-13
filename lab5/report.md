@@ -65,14 +65,11 @@ hello appsec world
 
     3. Запускается основной сценарий приложения
 Делаем снимок
-4. IP у сетевой карты `Ethernet` нет, поэтому беру обычный IPv4-адрес
-```
-PS C:\Users\user\PycharmProjects\lanit_labs\lab3> nmap -sP 192.168.0.104
-Starting Nmap 7.98 ( https://nmap.org ) at 2025-12-11 18:23 +0300
-Nmap scan report for 192.168.0.104
-Host is up.
-Nmap done: 1 IP address (1 host up) scanned in 0.71 seconds
-```
+
+4. Копируем файл из первой работы в нашу папку и переименовываем в hello2.py.
+Меняем Dockerfile и анализируем его.
+Делаем снимок
+
 5. Используем nmap и анализируем
 ```
 PS C:\Users\user\PycharmProjects\lanit_labs\lab3> nmap -O localhost  # Для ОС
