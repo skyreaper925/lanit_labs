@@ -6,7 +6,6 @@
 <a href="https://img.shields.io/badge/Risk_Analyze-2448a2"><img src="https://img.shields.io/badge/Course-Risk_Analysis-2448a2" alt= "RA"></a> <img src="https://img.shields.io/badge/AppSec-2448a2" alt= "RA">
 
 ***
-
 ## Список выполненного
 
 - [x] 1. Необходимо установить `Docker Engine` для Linux
