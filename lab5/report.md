@@ -2,7 +2,7 @@
 ### Володин Максим
 
 1. Устанавливаю docker-desktop для Windows через Chocolatey
-2. Анализируем ответы
+2. Анализируем ответы.
 Сначала настройка и запуск
 ```
  PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker buildx build -t hellow-appsec-world .           
@@ -259,7 +259,7 @@ c929fe9bab3cb62fd54cd10ca120efa93bb394a260d5540fadafcbf2aa259bef
 ```
 
 Теперь получаем эталонный архив.
-Архив от преподавателя недопустен для linux/amd64, поэтому был взят похожий найденный
+Архив от преподавателя недоступен для linux/amd64, поэтому был взят похожий найденный
 ```
 PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker image pull zlatasin/hello-appsec-world                    
 Using default tag: latest
@@ -484,5 +484,7 @@ time="2025-12-14T13:02:51+03:00" level=warning msg="C:\\Users\\user\\PycharmProj
  ✔ Container lab5-server-1  Removed                                                                                                                                            0.2s 
  ✔ Network lab5_app_net     Removed
  ```
-14. По-большому счёту, доработка не требуется, однако была произведена.
+14. По-большому счёту, доработка не требуется, но была произведена.
 Делаем снимок
+15. Делаем отправку на удалённое хранилище
+16. Оформляем отчёт и делаем снимок с отправкой

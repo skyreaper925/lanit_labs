@@ -50,7 +50,7 @@ RUN pip install --upgrade pip && pip wheel --wheel-dir=/wheels -r requirements.t
 FROM python:3.11-slim
 WORKDIR /hello
 # Копируем файл с зависимостями
-COPY --from=builder /wheels /wheels # Копируем собранные wheel-пакеты
+COPY --from=builder /wheels /wheels
 COPY requirements.txt . 
 # Устанавливаем зависимости из wheel-пакетов
 RUN pip install --no-index --find-links=/wheels -r requirements.txt
@@ -133,25 +133,8 @@ $ docker images
 $ docker ps -q | xargs docker stop
 $ docker-compose down
 ```
-- [ ] 14. Доработайте `docker-compose` и скрипт, который вы подготовили ранее, что бы вы смогли воспроизвести шаги п.11 по п.13 с демонстрацией. Сделайте `commit`.
-- [ ] 15. Залейте изменения в свой удаленный репозиторий, проверьте историю `commit`.
-- [ ] 16. Подготовьте отчет `gist`.
- 
-***
-
-## Links
-
-- [Markdown](https://stackedit.io)
-- [Gist](https://gist.github.com)
-- [GitHub CLI](https://cli.github.com)
-- [GitHub Docs](https://docs.github.com/en)
-- [Docker](https://docs.docker.com/)
-- [Docker Engine overview](https://docs.docker.com/engine/)
-- [Dockerfile reference](https://docs.docker.com/reference/dockerfile/)
-- [Docker Compose documentation](https://docs.docker.com/compose/)
-- [Docker Hub](https://hub.docker.com/)
-- [Docker security overview](https://docs.docker.com/engine/security/)
-
-Copyright (c) 2025 Elijah S Shmakov
-
-![Logo](../../assets/logotype/logo.jpg)
+- [x] 14. Доработайте `docker-compose` и скрипт, который вы подготовили ранее, что бы вы смогли воспроизвести шаги п.
+  11 по п.13 с демонстрацией.
+Сделайте `commit`.
+- [x] 15. Залейте изменения в свой удалённый репозиторий, проверьте историю `commit`.
+- [x] 16. Подготовьте отчёт `gist`.
