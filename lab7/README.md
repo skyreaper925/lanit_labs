@@ -69,16 +69,16 @@ $ mvn org.owasp:dependency-check-maven:check || true # Maven-плагин OWASP
 $ bash sca/generate_unified_report.sh
 ```
 
-- [ ] 8. Проанализируйте все уязвимости и обьясните для SAST Checkov сработки статуса `Unknown`.
+- [x] 8. Проанализируйте все уязвимости и обьясните для SAST Checkov сработки статуса `Unknown`.
 Классифицируйте их и укажите какие не должны быть в отчётах.
 Внесите исправления и запустите повторное сканирование и убедитесь, что они устранены.
 Приложите исправленный файл и отчёт без уязвимостей. 
-- [ ] 9. Опишите выведенные уязвимости для SAST Semgrep и принцип их работы.
+- [x] 9. Опишите выведенные уязвимости для SAST Semgrep и принцип их работы.
 Поправьте скрипт `app.py`.
 Запустите повторное сканирование и убедитесь, что они устранены.
 Приложите исправленный файл `app.py` и отчёт без уязвимостей. 
-- [ ] 10. Доработайте SCA уязвимости, что бы они только остались в фиинальной версии отчётов.
-- [ ] 11. Проверьте себя по найденным сработкам анализаторов и так вы сможете помочь себе разобраться в ситуации, если
+- [x] 10. Доработайте SCA уязвимости, что бы они только остались в фиинальной версии отчётов.
+- [x] 11. Проверьте себя по найденным сработкам анализаторов и так вы сможете помочь себе разобраться в ситуации, если
 возникнут сложности
 
 ```bash
@@ -96,23 +96,3 @@ $ docker-compose -f ххх down
 $ docker-compose -f docker-compose.yml down
 $ docker system prune -f
 ```
-
-***
-
-## Links
-
-- [Docker](https://docs.docker.com/)
-- [Markdown](https://stackedit.io)
-- [Gist](https://gist.github.com)
-- [GitHub CLI](https://cli.github.com)
-- [OWASP Top Ten и Software Composition Analysis](https://pvs-studio.ru/ru/blog/posts/csharp/0876/)
-- [OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/)
-- [Semgrep CLI – Local scans](https://semgrep.dev/docs/getting-started/cli)
-- [Semgrep CLI reference](https://semgrep.dev/docs/cli-reference/)
-- [Checkov CLI Command Reference](https://www.checkov.io/2.Basics/CLI%20Command%20Reference.html)
-- [Checkov](https://www.checkov.io/2.Basics/CLI%20Command%20Reference.html) 
-- [GitHub Docs](https://docs.github.com/en)
-
-Copyright (c) 2025 Elijah S Shmakov
-
-![Logo](../../assets/logotype/logo.jpg)
