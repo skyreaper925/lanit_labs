@@ -21,4 +21,4 @@ COPY hello2.py .
 #stage 3. buferisation is disabled
 ENV PYTHONUNBUFFERED=1
 #the main script starts
-CMD ["python", "hello2.py"]
+ENTRYPOINT ["python", "hello2.py"]

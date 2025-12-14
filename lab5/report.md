@@ -70,60 +70,67 @@ hello appsec world
 Меняем Dockerfile и анализируем его.
 Делаем снимок
 
-5. Используем nmap и анализируем
+5. Анализируем ответы
 ```
-PS C:\Users\user\PycharmProjects\lanit_labs\lab3> nmap -O localhost  # Для ОС
-Starting Nmap 7.98 ( https://nmap.org ) at 2025-12-11 18:25 +0300
-Nmap scan report for localhost (127.0.0.1)
-Host is up (0.00068s latency).
-Other addresses for localhost (not scanned): ::1
-Not shown: 997 closed tcp ports (reset)
-PORT     STATE SERVICE
-135/tcp  open  msrpc
-445/tcp  open  microsoft-ds
-7070/tcp open  realserver
-No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
-TCP/IP fingerprint:
-OS:SCAN(V=7.98%E=4%D=12/11%OT=135%CT=1%CU=39031%PV=Y%DS=0%DC=L%G=Y%TM=693AE
-OS:259%P=i686-pc-windows-windows)SEQ(SP=100%GCD=1%ISR=106%TI=I%CI=I%II=I%SS
-OS:=S%TS=U)SEQ(SP=100%GCD=1%ISR=107%TI=I%CI=I%II=I%SS=S%TS=U)SEQ(SP=100%GCD
-OS:=1%ISR=10C%TI=I%CI=I%II=I%SS=S%TS=U)SEQ(SP=FD%GCD=1%ISR=102%TI=I%CI=I%II
-OS:=I%SS=S%TS=U)SEQ(SP=FD%GCD=1%ISR=108%TI=I%CI=I%II=I%SS=S%TS=U)OPS(O1=MFF
-OS:D7NW8NNS%O2=MFFD7NW8NNS%O3=MFFD7NW8%O4=MFFD7NW8NNS%O5=MFFD7NW8NNS%O6=MFF
-OS:D7NNS)WIN(W1=FFFF%W2=FFFF%W3=FFFF%W4=FFFF%W5=FFFF%W6=FFFF)ECN(R=Y%DF=Y%T
-OS:=40%W=FFFF%O=MFFD7NW8NNS%CC=N%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)
-OS:T2(R=Y%DF=Y%T=40%W=0%S=Z%A=S%F=AR%O=%RD=0%Q=)T3(R=Y%DF=Y%T=40%W=0%S=Z%A=
-OS:O%F=AR%O=%RD=0%Q=)T4(R=Y%DF=Y%T=40%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T5(R=Y%DF=
-OS:Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=O%F=R%O=%
-OS:RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%I
-OS:PL=164%UN=0%RIPL=G%RID=G%RIPCK=Z%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=Z)
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker buildx build -t hello-appsec-world .
+[+] Building 1.0s (13/13) FINISHED                                                                                                                             docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                           0.0s
+ => => transferring dockerfile: 796B                                                                                                                                           0.0s 
+ => [internal] load metadata for docker.io/library/python:3.11-slim                                                                                                            0.3s 
+ => [internal] load .dockerignore                                                                                                                                              0.0s
+ => => transferring context: 2B                                                                                                                                                0.0s 
+ => [internal] load build context                                                                                                                                              0.0s 
+ => => transferring context: 66B                                                                                                                                               0.0s 
+ => [builder 1/4] FROM docker.io/library/python:3.11-slim@sha256:158caf0e080e2cd74ef2879ed3c4e697792ee65251c8208b7afb56683c32ea6c                                              0.1s 
+ => => resolve docker.io/library/python:3.11-slim@sha256:158caf0e080e2cd74ef2879ed3c4e697792ee65251c8208b7afb56683c32ea6c                                                      0.1s 
+ => CACHED [builder 2/4] WORKDIR /hello                                                                                                                                        0.0s 
+ => CACHED [builder 3/4] COPY requirements.txt .                                                                                                                               0.0s
+ => CACHED [builder 4/4] RUN pip install --upgrade pip && pip wheel --wheel-dir=/wheels -r requirements.txt                                                                    0.0s 
+ => CACHED [stage-1 3/6] COPY --from=builder /wheels /wheels                                                                                                                   0.0s 
+ => CACHED [stage-1 4/6] COPY requirements.txt .                                                                                                                               0.0s 
+ => CACHED [stage-1 5/6] RUN pip install --no-index --find-links=/wheels -r requirements.txt                                                                                   0.0s 
+ => CACHED [stage-1 6/6] COPY hello2.py .                                                                                                                                      0.0s 
+ => exporting to image                                                                                                                                                         0.3s 
+ => => exporting layers                                                                                                                                                        0.0s 
+ => => exporting manifest sha256:e616096521d87e359016897a95328555ce4e69fc25e904bbf51acc23626da0cc                                                                              0.0s 
+ => => exporting config sha256:299df4359d31c14d1778b6124d44a7412f64c91ddd8c86e561d531229c0f773c                                                                                0.0s 
+ => => exporting attestation manifest sha256:3492461941a290fa140decee2637a1ca2f1eb73634489d00ca48dd8fa3c9633d                                                                  0.1s 
+ => => exporting manifest list sha256:a574690d2d058d09bc6742ec31fc3b2e75c7b861a981881fdd50f81349c87c3d                                                                         0.0s 
+ => => naming to docker.io/library/hello-appsec-world:latest                                                                                                                   0.0s 
+ => => unpacking to docker.io/library/hello-appsec-world:latest                                                                                                                0.0s 
+```
+```
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker run hello-appsec-world h                                                                                            
+Hello, h!
+```
+Команда docker save -o hello_ypur_project.tar hello-appsec-world выполнилась без ответа
 
-Network Distance: 0 hops
-
-OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 11.44 seconds
-(.venv) PS C:\Users\user\PycharmProjects\lanit_labs\lab3> nmap -sV -p 22 localhost  # Для SSH
-Starting Nmap 7.98 ( https://nmap.org ) at 2025-12-11 18:25 +0300
-Nmap scan report for localhost (127.0.0.1)
-Host is up (0.00s latency).
-Other addresses for localhost (not scanned): ::1
-
-PORT   STATE  SERVICE VERSION
-22/tcp closed ssh
-
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 0.56 seconds
-(.venv) PS C:\Users\user\PycharmProjects\lanit_labs\lab3> nmap -sV -p 23 localhost
-Starting Nmap 7.98 ( https://nmap.org ) at 2025-12-11 18:26 +0300
-Nmap scan report for localhost (127.0.0.1)
-Host is up (0.0010s latency).
-Other addresses for localhost (not scanned): ::1
-
-PORT   STATE  SERVICE VERSION
-23/tcp closed telnet
-
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 0.56 seconds
+Загружаем из файла
+```
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker load -i hello_ypur_project.tar
+Loaded image: hello-appsec-world:latest
+```
+```
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker run hello-appsec-world Paul
+Hello, Paul!
+```
+Выгружаем старый файл
+```
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker load -i hello.tar          
+Loaded image: hellow-appsec-world:latest
+```
+```
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker run hello-appsec-world Paul
+Hello, Paul!
+```
+Сравниваем суммы: не равны
+```
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> (Get-FileHash hello_ypur_project.tar -Algorithm SHA256).Hash
+1393B0535CBF34A19C8A8CB96B760FE39EE71DE23E65F83E6A7990FCF352CE9B
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> (Get-FileHash hello.tar -Algorithm SHA256).Hash
+3CA95D23B7FDE0FEDB6526BE1AC9D6F8450D4F686A8B4D92B10DA0C0B327639C
 ```
 В итоге выясняется, что это Windows (хотя сам nmap это автоматически не понял), ssh и telnet закрыты
-6. Выполняем команду Copy-Item -Path nmapres_new.txt -Destination nmapres.txt и результат скопирован
+
+6. Дорабатываем сценарий, путём прописывания требований.
+Была выбрана запись со знаками порядка для большей гибкости: `typer>=0.20.0`
