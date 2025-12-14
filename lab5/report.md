@@ -134,3 +134,36 @@ PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> (Get-FileHash hello.tar
 
 6. Дорабатываем сценарий, путём прописывания требований.
 Была выбрана запись со знаками порядка для большей гибкости: `typer>=0.20.0`
+
+7. Делаю снимок.
+Повторяю сборку
+```
+PS C:\Users\user\PycharmProjects\lanit_labs\lab5\source> docker buildx build -t hello-appsec-world .                 
+[+] Building 2.2s (14/14) FINISHED                                                                                                                             docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                           0.0s
+ => => transferring dockerfile: 796B                                                                                                                                           0.0s 
+ => [internal] load metadata for docker.io/library/python:3.11-slim                                                                                                            1.6s 
+ => [auth] library/python:pull token for registry-1.docker.io                                                                                                                  0.0s
+ => [internal] load .dockerignore                                                                                                                                              0.0s
+ => => transferring context: 2B                                                                                                                                                0.0s 
+ => [internal] load build context                                                                                                                                              0.0s 
+ => => transferring context: 66B                                                                                                                                               0.0s 
+ => [builder 1/4] FROM docker.io/library/python:3.11-slim@sha256:158caf0e080e2cd74ef2879ed3c4e697792ee65251c8208b7afb56683c32ea6c                                              0.1s 
+ => => resolve docker.io/library/python:3.11-slim@sha256:158caf0e080e2cd74ef2879ed3c4e697792ee65251c8208b7afb56683c32ea6c                                                      0.0s 
+ => CACHED [builder 2/4] WORKDIR /hello                                                                                                                                        0.0s
+ => CACHED [builder 3/4] COPY requirements.txt .                                                                                                                               0.0s 
+ => CACHED [builder 4/4] RUN pip install --upgrade pip && pip wheel --wheel-dir=/wheels -r requirements.txt                                                                    0.0s 
+ => CACHED [stage-1 3/6] COPY --from=builder /wheels /wheels                                                                                                                   0.0s 
+ => CACHED [stage-1 4/6] COPY requirements.txt .                                                                                                                               0.0s 
+ => CACHED [stage-1 5/6] RUN pip install --no-index --find-links=/wheels -r requirements.txt                                                                                   0.0s 
+ => CACHED [stage-1 6/6] COPY hello2.py .                                                                                                                                      0.0s 
+ => exporting to image                                                                                                                                                         0.2s 
+ => => exporting layers                                                                                                                                                        0.0s 
+ => => exporting manifest sha256:e616096521d87e359016897a95328555ce4e69fc25e904bbf51acc23626da0cc                                                                              0.0s 
+ => => exporting config sha256:299df4359d31c14d1778b6124d44a7412f64c91ddd8c86e561d531229c0f773c                                                                                0.0s 
+ => => exporting attestation manifest sha256:a2b6b7d49997b51e821bcee2d26ba97a819b7dcda0a1cfe48496635c4fc754ae                                                                  0.1s 
+ => => exporting manifest list sha256:e30ca18ab248eb250e64e2dded38b6f6d5376e5035ff2059c4659a6cc57e5455                                                                         0.0s 
+ => => naming to docker.io/library/hello-appsec-world:latest                                                                                                                   0.0s 
+ => => unpacking to docker.io/library/hello-appsec-world:latest 
+```
+Теперь сохраняю конфигурацию в архив hello_ypur_project и вновь делаю снимок
