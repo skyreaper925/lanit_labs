@@ -1,0 +1,116 @@
+services:
+  vulnerable-web:
+    image: nginx:alpine
+    container_name: nginx-secure
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    security_opt:
+      - no-new-privileges:true
+    user: "101:101"  # nginx user UID/GID
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    networks:
+      - frontend
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  insecure-db:
+    image: postgres:16-alpine
+    container_name: postgres-secure
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+      - POSTGRES_DB=vulnapp
+      - POSTGRES_USER=vulnuser
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    secrets:
+      - db_password
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '1.0'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vulnuser"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  app:
+    image: python:3.11-alpine
+    container_name: app-secure
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./app:/app:ro
+    command: ["python", "app.py"]
+    environment:
+      - DEBUG=false
+      - DB_HOST=insecure-db
+      - DB_PORT=5432
+      - DB_NAME=vulnapp
+    secrets:
+      - app_secret_key
+      - db_password
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      insecure-db:
+        condition: service_healthy
+    user: "1000:1000"
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+
+secrets:
+  db_password:
+    external: true
+    name: db_password_prod
+  app_secret_key:
+    external: true
+    name: app_secret_key_prod
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./postgres_data
+
+networks:
+  frontend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.1.0/24
+  backend:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 10.10.2.0/24
