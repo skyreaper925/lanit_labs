@@ -6,3 +6,11 @@
 *.iml
 out
 gen
+
+# Python virtual environments (lab5/lab6/lab7 tooling)
+venv/
+**/venv/
+.venv/
+
+# Cloned upstream tools (not deliverables)
+lab6/docker-bench/
